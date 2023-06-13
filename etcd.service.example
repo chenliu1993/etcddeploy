@@ -1,0 +1,32 @@
+[Unit]
+Description=etcd Service
+After=network.target
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=root
+Group=root
+Type=notify
+WorkingDirectory=/home/cliu/data/etcd
+ExecStart=/usr/bin/etcd \
+--name=debian3 \
+--initial-advertise-peer-urls=http://192.168.2.58:2380 \
+--listen-peer-urls=http://192.168.2.58:2380 \
+--listen-client-urls=http://192.168.2.58:2379,http://127.0.0.1:2379 \
+--advertise-client-urls=http://192.168.2.58:2379 \
+--initial-cluster-token=etcd-cluster-0 \
+--initial-cluster=192.168.2.58=http://192.168.2.58:2380,192.168.2.59=http://192.168.2.59:2380,192.168.2.60=http://192.168.2.60:2380 \
+--initial-cluster-state=new \
+--auto-compaction-retention=1 \
+--auto-compaction-mode=revision \
+--snapshot-count=1000000  \
+--max-snapshots=2 \
+--max-wals=2 \
+--data-dir=/data/etcd/data
+Restart=on-failure
+RestartSec=5
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target
