@@ -1,0 +1,96 @@
+﻿version: "3"
+services:
+  jellyfin:
+    image: nyanmisaka/jellyfin:230414-amd64
+    container_name: jellyfin
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=Asia/Shanghai
+    volumes:
+      - /share/Container/suite/jellyfin/config:/config
+      - /share/Multimedia:/media
+    ports:
+      - 12501:8096
+      - 12502:8920
+  jellyseerr:
+    image: fallenbagel/jellyseerr:1.5.0
+    container_name: jellyseerr
+    environment:
+      - LOG_LEVEL=debug
+      - TZ=Asia/Shanghai
+    ports:
+      - 5055:5055
+    volumes:
+      - /share/Container/suite/jellyseer/config:/app/config
+    restart: unless-stopped
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:4.5.3
+    container_name: qbittorrent
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Shanghai
+      - WEBUI_PORT=8080
+    volumes:
+      - /share/Container/suite/qb/config:/config
+      - /share/Public/downloaded:/downloads
+    ports:
+      - 8080:8080
+      - 6882:6881
+      - 6882:6881/udp
+    restart: unless-stopped
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Shanghai
+    volumes:
+      - /share/Container/suite/radaar/config:/config
+      - /share/Public/downloaded:/downloads #optional
+    ports:
+      - 7878:7878
+    restart: unless-stopped
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    container_name: prowlarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Shanghai
+    volumes:
+      - /share/Container/suite/prowlarr/config:/config
+    ports:
+      - 9696:9696
+    restart: unless-stopped
+  tinymediamanager:
+    image: tinymediamanager/tinymediamanager:4.3.11
+    container_name: tinymediamanager
+    environment:
+      - USER_ID=0
+      - GROUP_ID=0
+      - TZ=Asia/Shanghai
+      - ENABLE_CJK_FONT=true
+    volumes:
+      - /share/Container/suite/tinymediamanager/data:/data
+      - /share/Multimedia:/media
+      - /share/Container/suite/tinymediamanager/addons:/app/addons
+    ports:
+      - 4000:4000
+    restart: unless-stopped
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:version-3.0.10.1567
+    container_name: sonarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Shanghai
+    volumes:
+      - /share/Container/suite/sonarr/config:/config
+      - /share/Multimedia/shows:/tv #optional
+      - /share/Public/downloaded:/downloads #optional
+    ports:
+      - 8989:8989
+    restart: unless-stopped
