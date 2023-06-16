@@ -89,7 +89,7 @@ services:
       - TZ=Asia/Shanghai
     volumes:
       - /share/Container/suite/sonarr/config:/config
-      - /share/Multimedia/shows:/tv #optional
+      - /share/Multimedia:/media #optional
       - /share/Public/downloaded:/downloads #optional
     ports:
       - 8989:8989
