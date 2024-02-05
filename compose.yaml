@@ -14,7 +14,7 @@ services:
       - 12501:8096
       - 12502:8920
   jellyseerr:
-    image: fallenbagel/jellyseerr:1.5.0
+    image: fallenbagel/jellyseerr:1.7.0
     container_name: jellyseerr
     environment:
       - LOG_LEVEL=debug
@@ -50,6 +50,7 @@ services:
     volumes:
       - /share/Container/suite/radaar/config:/config
       - /share/Public/downloaded:/downloads #optional
+      - /share/Multimedia:/media #optional
     ports:
       - 7878:7878
     restart: unless-stopped
@@ -91,6 +92,9 @@ services:
       - /share/Container/suite/sonarr/config:/config
       - /share/Multimedia:/media #optional
       - /share/Public/downloaded:/downloads #optional
+    ports:
+      - 8989:8989
+    restart: unless-stopped
     ports:
       - 8989:8989
     restart: unless-stopped
