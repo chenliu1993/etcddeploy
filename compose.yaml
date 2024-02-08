@@ -37,8 +37,9 @@ services:
       - /share/Public/downloaded:/downloads
     ports:
       - 8080:8080
-      - 6882:6881
-      - 6882:6881/udp
+      # After qBit starts, go to conf to change 6881 to 7070
+      - 7070:7070
+      - 7070:7070/udp
     restart: unless-stopped
   radarr:
     image: lscr.io/linuxserver/radarr:5.2.6
