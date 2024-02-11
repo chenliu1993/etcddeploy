@@ -32,5 +32,5 @@ services:
   redis:
     command:
     - --loglevel warning
-    image: sameersbn/redis:6.2
+    image: redis:6.2
     restart: always
