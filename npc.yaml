@@ -3,5 +3,9 @@ services:
   npc:
     image: cliu2/npc:v0.26.10
     network_mode: "host"
+    working_dir: /npc
     entrypoint: ./npc -server=10.147.20.76:28024 -vkey=hxox90g4mqiphbf2 -type=tcp 1>/var/log/npc.log 2>/var/log/npcerror.log
+    volumes:
+    - /var/log/npc.log:/var/log/npc.log
+    - /var/log/npcerror.log:/var/log/npcerror.log
     restart: always
