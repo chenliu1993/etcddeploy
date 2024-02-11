@@ -1,18 +1,20 @@
+version: "3"
 services:
   gitlab:
     environment:
-      DEBUG: "false"
-      GITLAB_PORT: 12080
-      GITLAB_SECRETS_DB_KEY_BASE: qcs-gitlab-app
-      GITLAB_SECRETS_OTP_KEY_BASE: qcs-gitlab-app
-      GITLAB_SECRETS_SECRET_KEY_BASE: qcs-gitlab-app
-      GITLAB_SSH_PORT: 12022
-    image: sameersbn/gitlab:11.4.0
+    - DEBUG=false
+    - GITLAB_HOST=www.imclius.top
+    - GITLAB_PORT=12080
+    - GITLAB_SECRETS_DB_KEY_BASE=qcs-gitlab-app
+    - GITLAB_SECRETS_OTP_KEY_BASE=qcs-gitlab-app
+    - GITLAB_SECRETS_SECRET_KEY_BASE=qcs-gitlab-app
+    - GITLAB_SSH_PORT=12022
+    image: sameersbn/gitlab:16.8.1
     links:
     - redis:redisio
     - postgresql:postgresql
     ports:
-    - 12080:80
+    - "12080:80"
     - "12022:22"
     restart: always
     volumes:
@@ -21,15 +23,14 @@ services:
     - /Container/gitlab/data:/var/opt/gitlab
   postgresql:
     environment:
-      DB_EXTENSION: pg_trgm
-      DB_NAME: gitlabhq_production
-      DB_PASS: password
-      DB_USER: gitlab
-    image: sameersbn/postgresql:9.6-2
+    - DB_EXTENSION=pg_trgm
+    - DB_NAME=gitlabhq_production
+    - DB_PASS=password
+    - DB_USER=gitlab
+    image: sameersbn/postgresql:14-20230628
     restart: always
   redis:
     command:
     - --loglevel warning
-    image: sameersbn/redis:latest
+    image: sameersbn/redis:6.2
     restart: always
-version: "2"
