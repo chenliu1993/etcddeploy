@@ -3,6 +3,7 @@ services:
   zerotier:
     image: zyclonite/zerotier:1.12.2
     container_name: zerotier-one
+    entrypoint: /usr/sbin/zerotier-cli join 565799d8f605857e
     devices:
       - /dev/net/tun
     network_mode: host
