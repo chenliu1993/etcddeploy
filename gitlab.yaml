@@ -2,7 +2,7 @@ version: "3"
 services:
   gitlab:
     environment:
-    - DEBUG=false
+    - DEBUG=true
     - REDIS_HOST=redis
     - REDIS_PORT=6379
     - GITLAB_HOST=www.imclius.top
@@ -42,3 +42,14 @@ services:
     - --loglevel warning
     image: redis:6.2.6
     restart: always
+  pgadmin4:
+    image: elestio/pgadmin@sha256:4f96197989c6a7bbca4df4101c3fb406e9a1ae752f081107bbc2ebacd27bce5b
+    restart: always
+    environment:
+    - PGADMIN_DEFAULT_EMAIL=cl2037829916@gmail.com
+    - PGADMIN_DEFAULT_PASSWORD=19930825abcD!
+    - PGADMIN_LISTEN_PORT=56082
+    ports:
+    - "56082:56082"
+    volumes:
+    - ./servers.json:/pgadmin4/servers.json
