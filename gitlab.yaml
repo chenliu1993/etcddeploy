@@ -11,6 +11,11 @@ services:
     - GITLAB_SECRETS_OTP_KEY_BASE=qcs-gitlab-app
     - GITLAB_SECRETS_SECRET_KEY_BASE=qcs-gitlab-app
     - GITLAB_SSH_PORT=12022
+    - SMTP_USER=cl2037829916@gmail.com
+    - SMTP_PASS=
+    - IMAP_USER=cl2037829916@gmail.com
+    - GITLAB_INCOMING_EMAIL_ADDRESS=USER+%{key}@gmail.com
+    - IMAP_PASS=
     - DB_ADAPTER=postgresql
     - DB_HOST=postgresql
     - DB_PORT=5432
