@@ -41,6 +41,8 @@ services:
     - DB_PASS=password
     - DB_USER=gitlab
     image: sameersbn/postgresql:14-20230628
+    ports:
+    - "35432:5432"
     restart: always
   redis:
     command:
