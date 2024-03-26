@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  graphite-statsd:
+    image: graphiteapp/graphite-statsd:1.1.10-5
+    # volumes:
+    # - /opt/graphite:/opt/graphite
+    ports:
+    - "81:80"
+    - "2003-2004:2003-2004"
+    - "2023-2024:2023-2024"
+    - "8125:8125/udp"
+    - "8126:8126"
+    - "8081:8080"
